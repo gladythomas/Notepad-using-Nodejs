@@ -23,7 +23,13 @@ app.get('/file/:filename', (req,res)=>{
 })
 
 app.get('/edit/:filename', (req,res)=>{
-    res.render('edit');
+    res.render('edit',{filename:req.params.filename});
+})
+
+app.post('/edit',(req,res)=>{
+    fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`,function(err){
+        res.redirect('/');
+    });
 })
 
 
